@@ -2,4 +2,4 @@ Contents are shown in `credo.json`
 
 An example JavaScript function is provided.
 
-You can run the function in Safari JavaScript console, but not in Chrome console because it violates Content Security Policy of Chrome
+You can run the function in the Safari JavaScript console, but not in the Chrome console due to Chrome's Content Security Policy restrictions.
