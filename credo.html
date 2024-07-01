@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Credo</title>
+</head>
+
+<body>
+    <h1>Random Credo</h1>
+    <button id="getCredoBtn">Get Random Credo</button>
+    <div id="credoDisplay">
+        <p><strong>No. </strong> <span id="credoId"></span></p>
+        <p><strong>Text: </strong> <span id="credoText"></span></p>
+        <p><strong>Details: </strong> <span id="credoDetails"></span></p>
+    </div>
+
+    <script>
+        async function getRandomCredo() {
+            const url = 'https://raw.githubusercontent.com/clinikarte/credo/main/credo.json';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                const data = await response.json();
+                const credoList = data.credo;
+
+                const randomIndex = Math.floor(Math.random() * credoList.length);
+                const randomCredo = credoList[randomIndex];
+
+                console.log(randomCredo);
+                document.getElementById('credoId').innerText = randomCredo.id;
+                document.getElementById('credoText').innerText = randomCredo.text;
+                document.getElementById('credoDetails').innerText = randomCredo.details;
+                return randomCredo;
+            } catch (error) {
+                console.error('Fetch error: ', error);
+                document.getElementById('credoId').innerText = 'Error';
+                document.getElementById('credoText').innerText = 'Error fetching credo';
+                document.getElementById('credoDetails').innerText = '';
+            }
+        }
+
+        document.getElementById('getCredoBtn').addEventListener('click', getRandomCredo);
+    </script>
+</body>
+
+</html>
